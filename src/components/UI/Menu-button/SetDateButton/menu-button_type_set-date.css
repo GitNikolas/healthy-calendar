@@ -1,0 +1,14 @@
+.menu-button_type_set-date{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.menu-button_text {
+    margin: 0 25px 0;
+}
+
+.calendar-logo {
+    width: 20px;
+    height: 20px;
+}
