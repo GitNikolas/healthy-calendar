@@ -10,11 +10,17 @@ interface CalendarProps {
     locale?: string;
     selectedDate?: Date;
     selectDate?: (date: Date) => void;
+    firstWeekDay?: number;
 }
 
-export const Calendar: React.FC<CalendarProps> = ({ locale = 'default', selectDate, selectedDate }) =>  {
+export const Calendar: React.FC<CalendarProps> = ({
+    locale = 'default',
+    firstWeekDay = 2,
+    selectDate,
+    selectedDate
+    }) =>  {
 
-    const {} = useCalendar({ locale, selectedDate })
+    const {} = useCalendar({ firstWeekDay, locale, selectedDate })
 
     function test() {
         // createPost(string)
