@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Calendar } from './components/Calendar/Calendar';
-import Header from './components/Header/Header';
+import { Header } from './components/Header/Header';
 import { Main } from './components/Main/Main';
 
 function App() {
 
-  const [selectedDate, selectDate] = React.useState(new Date())
+  const [selectedDate, selectDate] = React.useState(new Date());
+
+  const [isOpen, setIsOpen] = useState(false);
+
+
+  function toggleOpenCalendar () {
+    setIsOpen(!isOpen);
+  }
 
   // async function createPost(data:string){
   //   let response = await fetch('http://localhost:3001/posts', {
@@ -28,9 +35,9 @@ function App() {
 
   return (
     <div className="app">
-      <Header/>
+      <Header toggleOpenCalendar={toggleOpenCalendar}/>
       <Main />
-      <Calendar selectDate={selectDate} selectedDate={selectedDate}/>
+      <Calendar isOpen={isOpen} toggleOpenCalendar={toggleOpenCalendar} selectDate={selectDate} selectedDate={selectedDate}/>
     </div>
   );
 }
