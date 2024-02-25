@@ -1,0 +1,32 @@
+.calendar {
+ display: none;
+ flex-direction: column;
+ background-color: white;
+ position: fixed;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ z-index: 1;
+ background-color: rgba(0,0,0,.4);
+}
+
+.calendar__overlay {
+    box-sizing: border-box;
+    padding: 10px;
+    position: absolute;
+    height: 65%;
+    width: 100%;
+    bottom:-65%;
+    left:0;
+    background-color: white;
+    z-index: 2;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+   }
+
+.calendar_opened {
+    display: block;
+    transform: translate(0, -65%);
+}
+
