@@ -3,4 +3,9 @@
     background-color: white;
     border-radius: 15px;
     min-width: 40px;
+    cursor: pointer;
+}
+
+.menu-button:hover{
+    box-shadow: 1px 1px 3px 1px gray;
 }
