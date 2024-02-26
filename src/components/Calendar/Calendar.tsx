@@ -33,29 +33,46 @@ export const Calendar: React.FC<CalendarProps> = ({
     const openCalendarContent:string = isOpen ? 'calendar__content_opened' : '';
     const openCalendarOverlay:string = isOpen ? 'calendar__overlay_opened' : '';
     const weekDays = ['Пн', 'Вт', 'Ср','Чт','Пт','Сб','Вс'];
-    const weekNumbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
 
     function toggleOpenCalendarHandler() {
         toggleOpenCalendar();
     }
 
     return (
-        <div className={`calendar ${openCalendar}`}>
-            <div className={`calendar__overlay ${openCalendarOverlay}`} onClick={toggleOpenCalendarHandler}></div>
-            <div className={`calendar__content ${openCalendarContent}`}>
-                <h2>Календарь</h2>
-                <div className='calendar__menu'>
-                    <button className='calendar__menu-button'>{'<'}</button>
-                    <button className='calendar__menu-button'>Март</button>
-                    <button className='calendar__menu-button'>{'>'}</button>
-                </div>
-                <ul className='calendar__table list-style'>
-                    {weekDays.map(item => <li className='calendar__week-days' key={item}>{item}</li>)}
-                    {weekNumbers.map(item => <li className='calendar__table-item' key={item}>{item}</li>)}
-                </ul>
-                <button className='calendar__choose-button'>Выбрать</button>
-            </div>
+      <div className={`calendar ${openCalendar}`}>
+        <div
+          className={`calendar__overlay ${openCalendarOverlay}`}
+          onClick={toggleOpenCalendarHandler}
+        ></div>
+        <div className={`calendar__content ${openCalendarContent}`}>
+          <h2>Календарь</h2>
+          <div className="calendar__menu">
+            <button className="calendar__menu-button">{"<"}</button>
+            {state.mode === "days" && (
+              <button className="calendar__menu-button">{`${state.selectedMonth.monthName} ${state.selectedYear}`}</button>
+            )}
+            {state.mode === "monthes" && (
+              <button className="calendar__menu-button">{`${state.selectedYear}`}</button>
+            )}
+            {state.mode === "years" && (
+              <button className="calendar__menu-button">{`${state.selectedYearInterval[0]} - ${state.selectedYearInterval[state.selectedYearInterval.length - 1]}`}</button>
+            )}
+            <button className="calendar__menu-button">{">"}</button>
+          </div>
+          <ul className="calendar__table list-style">
+            {weekDays.map((item) => (
+              <li className="calendar__week-days" key={item}>
+                {item}
+              </li>
+            ))}
+            {state.calendarDays.map((item) => (
+              <li className="calendar__table-item" key={item.timestamp}>
+                {item.dayNumber}
+              </li>
+            ))}
+          </ul>
+          <button className="calendar__choose-button">Выбрать</button>
         </div>
+      </div>
     );
   }
-  

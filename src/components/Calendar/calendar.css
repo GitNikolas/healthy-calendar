@@ -50,6 +50,7 @@
      background-color: white;
      cursor: pointer;
      border-radius: 10px;
+     text-transform: capitalize;
    }
 
    .calendar__menu-button:hover{

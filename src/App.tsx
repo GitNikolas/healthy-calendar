@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header toggleOpenCalendar={toggleOpenCalendar}/>
+      <Header toggleOpenCalendar={toggleOpenCalendar} selectedDate={selectedDate}/>
       <Main />
       <Calendar isOpen={isOpen} toggleOpenCalendar={toggleOpenCalendar} selectDate={selectDate} selectedDate={selectedDate}/>
     </div>

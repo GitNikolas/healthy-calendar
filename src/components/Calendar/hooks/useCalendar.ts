@@ -78,8 +78,6 @@ export const useCalendar = ({
     }, [selectedMonth.year,
         selectedMonth.monthIndex,
         selectedYear])
-
-    console.log(calendarDays);
     
     return {
         state: {
