@@ -1,6 +1,11 @@
 .calendar {
 }
 
+.calendar__title {
+  color: #3f3f3f;
+  margin-left: 5%;
+}
+
 .calendar__overlay {
     visibility: hidden;
     position: fixed;
@@ -51,6 +56,8 @@
      cursor: pointer;
      border-radius: 10px;
      text-transform: capitalize;
+     color:#3f3f3f;
+     font-weight: 550;
    }
 
    .calendar__menu-button:hover{
@@ -66,21 +73,35 @@
     text-align: center;
    }
 
-   .calendar__table-item{
+   .calendar__day{
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 5px;
+        font-weight: 500;
     }
 
-   .calendar__table-item:hover{
+   .calendar__day:hover{
         border: 1px solid gray;
    }
+
+   .calendar__today{
+    border: 2px solid rgb(5, 186, 5);
+  }
+
+  .calendar__weekend{
+    color: red;
+  }
+
+  .calendar__additional-day{
+    color: #bdbebd;
+  }
 
    .calendar__week-days{
      display: flex;
      justify-content: center;
      align-items: center;
+     text-transform: capitalize;
    }
 
    .calendar__choose-button{

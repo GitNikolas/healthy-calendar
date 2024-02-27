@@ -13,8 +13,7 @@ export const Header: React.FC<HeaderProps> = ({toggleOpenCalendar,selectedDate})
 
   console.log(selectedDate);
 
-  function toggleOpenCalendarHandler(event:any) {
-    event.stopPropagation();
+  function toggleOpenCalendarHandler() {
     toggleOpenCalendar();
   }
 
