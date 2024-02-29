@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Calendar } from './components/Calendar/Calendar';
-import { Header } from './components/Header/Header';
 import { Main } from './components/Main/Main';
 
 function App() {
@@ -16,9 +15,8 @@ function App() {
 
   return (
     <div className="app">
-      <Header toggleOpenCalendar={toggleOpenCalendar} selectedDate={selectedDate}/>
-      <Main />
       <Calendar isOpen={isOpen} toggleOpenCalendar={toggleOpenCalendar} selectDate={selectDate} selectedDate={selectedDate}/>
+      <Main />
     </div>
   );
 }

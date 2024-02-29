@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from "react";
+import React, {useState, useMemo, useEffect} from "react";
 import { createDate } from "../../../utils/date/createDate";
 import { createMonth } from "../../../utils/date/createMonth";
 import { getMonthNames } from "../../../utils/date/getMonthNames";
@@ -7,7 +7,7 @@ import { getMonthNumberOfDays } from "../../../utils/date/getMonthNumberOfDays";
 
 interface useCalendarParams {
     locale?: string;
-    selectedDate?: Date;
+    selectedDate: Date;
     firstWeekDay: number;
 }
 
@@ -26,7 +26,10 @@ export const useCalendar = ({
     ) => {
     const [mode, setMode] = React.useState<'days' | 'monthes' | 'years'>('days')
 
-    const [selectedDate, setSelectedDate] = useState(createDate({ date }))
+    const [selectedDate, setSelectedDate] = useState(createDate({ date }));
+
+    useEffect(() => {console.log(selectedDate)}, [selectedDate])
+
     const [selectedMonth, setSelectedMonth] = useState(createMonth({ date: new Date(selectedDate.year, selectedDate.monthIndex), locale }));
 
     const [selectedYear, setSelectedYear] = useState(selectedDate.year);
@@ -38,11 +41,13 @@ export const useCalendar = ({
     const days = useMemo(() => selectedMonth.createMonthDays(), [selectedMonth, selectedYear]);
 
     const calendarDays = useMemo(() => {
-        const monthNumberOfDays = getMonthNumberOfDays(selectedDate.monthIndex, selectedYear)
+        const monthNumberOfDays = getMonthNumberOfDays(selectedMonth.monthIndex, selectedYear);
+
         const prevMonthDays = createMonth({
             date: new Date(selectedYear, selectedMonth.monthIndex - 1),
             locale
         }).createMonthDays();
+
         const nextMonthDays = createMonth({
             date: new Date(selectedYear, selectedMonth.monthIndex + 1),
             locale
@@ -77,7 +82,7 @@ export const useCalendar = ({
 
         return result;
 
-    }, [selectedMonth.year,
+    }, [ selectedMonth.year,
         selectedMonth.monthIndex,
         selectedYear])
         

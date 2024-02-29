@@ -6,14 +6,15 @@ import { useCalendar } from '../../components/Calendar/hooks/useCalendar';
 import { getMonthNames } from "../../utils/date/getMonthNames";
 import { getWeekDaysNames } from "../../utils/date/getWeekDaysNames";
 import './calendar.css';
-import { clickOptions } from "@testing-library/user-event/dist/click";
-import { stat } from "fs";
 import { checkIsToday } from "../../utils/date/checkIsToday";
 import { checkDateIsEqual } from "../../utils/date/checkDateIsEqual";
+import MenuButton from "../UI/Menu-button/MenuButton";
+import SetDateButton from "../UI/Menu-button/SetDateButton/SetDateButton";
+import { formateDate } from "../../utils/date/formateDate";
 
 interface CalendarProps {
     locale?: string;
-    selectedDate?: Date;
+    selectedDate: Date;
     selectDate: (date: Date) => void;
     firstWeekDay?: number;
     isOpen?: boolean;
@@ -24,15 +25,13 @@ export const Calendar: React.FC<CalendarProps> = ({
     locale = 'default',
     firstWeekDay = 2,
     selectDate,
-    selectedDate,
+    selectedDate: date,
     isOpen,
     toggleOpenCalendar
     }) =>  {
 
-    const { state,functions } = useCalendar({ firstWeekDay, locale, selectedDate });
-    console.log(state);
+    const { state,functions } = useCalendar({ firstWeekDay, locale, selectedDate: date });
 
-    const openCalendar:string = isOpen ? 'calendar_opened' : '';
     const openCalendarContent:string = isOpen ? 'calendar__content_opened' : '';
     const openCalendarOverlay:string = isOpen ? 'calendar__overlay_opened' : '';
 
@@ -41,7 +40,29 @@ export const Calendar: React.FC<CalendarProps> = ({
     }
 
     return (
-      <div className={`calendar ${openCalendar}`}>
+      <div className='calendar'>
+            <div className="calendar__header">
+          <div className="calendar__header-menu">
+            <MenuButton onClick={() => {
+              let selectDateTimestamp = state.selectedDate.timestamp;
+              let nextDate = selectDateTimestamp - (24*60*60*1000);
+              let date = new Date(nextDate);
+              functions.setSelectedDate(createDate({date}));
+              selectDate(date);
+            }}>{'<'}</MenuButton>
+            <SetDateButton onClick={toggleOpenCalendarHandler}>{formateDate(date,'DD.MM.YYYY')}</SetDateButton>
+
+{ !checkIsToday(state.selectedDate.date) &&  <MenuButton onClick={() => {
+              let selectDateTimestamp = state.selectedDate.timestamp;
+              let nextDate = selectDateTimestamp + (24*60*60*1000);
+              let date = new Date(nextDate);
+              functions.setSelectedDate(createDate({date}));
+              selectDate(date);
+            }}>{'>'}</MenuButton>}
+
+
+          </div>
+        </div>
         <div
           className={`calendar__overlay ${openCalendarOverlay}`}
           onClick={toggleOpenCalendarHandler}
@@ -93,6 +114,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                   day.monthIndex !== state.selectedMonth.monthIndex;
                 const isWeekend =
                   day.dayShort === "сб" || day.dayShort === "вс";
+                const underlining = day.timestamp <=  Date.now() ? 'calendar__day_underlining' : '';
 
                 return (
                   <li
@@ -101,6 +123,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                 ${isSelectedDay ? " calendar__today" : ""}
                 ${isWeekend ? " calendar__weekend" : ""}
                 ${isAdditionalDay ? " calendar__additional-day" : ""}
+                ${underlining ? " calendar__day_underlining" : ""}
                 `}
                     key={day.timestamp}
                     onClick={() => {
