@@ -28,8 +28,6 @@ export const useCalendar = ({
 
     const [selectedDate, setSelectedDate] = useState(createDate({ date }));
 
-    useEffect(() => {console.log(selectedDate)}, [selectedDate])
-
     const [selectedMonth, setSelectedMonth] = useState(createMonth({ date: new Date(selectedDate.year, selectedDate.monthIndex), locale }));
 
     const [selectedYear, setSelectedYear] = useState(selectedDate.year);

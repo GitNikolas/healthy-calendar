@@ -1,10 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createDate } from '../../utils/date/createDate';
-import { createMonth } from '../../utils/date/createMonth';
-import { createYear } from '../../utils/date/createYear';
 import { useCalendar } from '../../components/Calendar/hooks/useCalendar';
-import { getMonthNames } from "../../utils/date/getMonthNames";
-import { getWeekDaysNames } from "../../utils/date/getWeekDaysNames";
 import './calendar.css';
 import { checkIsToday } from "../../utils/date/checkIsToday";
 import { checkDateIsEqual } from "../../utils/date/checkDateIsEqual";
@@ -19,6 +15,8 @@ interface CalendarProps {
     firstWeekDay?: number;
     isOpen?: boolean;
     toggleOpenCalendar: Function;
+    yellowLine: number[];
+    greenLine: number[];
 }
 
 export const Calendar: React.FC<CalendarProps> = ({
@@ -27,9 +25,10 @@ export const Calendar: React.FC<CalendarProps> = ({
     selectDate,
     selectedDate: date,
     isOpen,
-    toggleOpenCalendar
+    toggleOpenCalendar,
+    yellowLine,
+    greenLine
     }) =>  {
-
     const { state,functions } = useCalendar({ firstWeekDay, locale, selectedDate: date });
 
     const openCalendarContent:string = isOpen ? 'calendar__content_opened' : '';
@@ -52,7 +51,7 @@ export const Calendar: React.FC<CalendarProps> = ({
             }}>{'<'}</MenuButton>
             <SetDateButton onClick={toggleOpenCalendarHandler}>{formateDate(date,'DD.MM.YYYY')}</SetDateButton>
 
-{ !checkIsToday(state.selectedDate.date) &&  <MenuButton onClick={() => {
+{ !checkIsToday(state.selectedDate.date)  && <MenuButton onClick={() => {
               let selectDateTimestamp = state.selectedDate.timestamp;
               let nextDate = selectDateTimestamp + (24*60*60*1000);
               let date = new Date(nextDate);
@@ -115,7 +114,8 @@ export const Calendar: React.FC<CalendarProps> = ({
                 const isWeekend =
                   day.dayShort === "сб" || day.dayShort === "вс";
                 const underlining = day.timestamp <=  Date.now() ? 'calendar__day_underlining' : '';
-
+                const underliningGreen = greenLine.includes(day.timestamp);
+                const underliningYellow = yellowLine.includes(day.timestamp);
                 return (
                   <li
                     className={`calendar__day 
@@ -124,10 +124,14 @@ export const Calendar: React.FC<CalendarProps> = ({
                 ${isWeekend ? " calendar__weekend" : ""}
                 ${isAdditionalDay ? " calendar__additional-day" : ""}
                 ${underlining ? " calendar__day_underlining" : ""}
+                ${underliningGreen  ? ' calendar__day_underlining_green' : ''}
+                ${underliningYellow ? ' calendar__day_underlining_yellow' : ''}
                 `}
                     key={day.timestamp}
                     onClick={() => {
-                      functions.setSelectedDate(day);
+                      if(day.timestamp <= Date.now()) {
+                        functions.setSelectedDate(day);
+                      }
                     }}
                   >
                     {day.dayNumber}

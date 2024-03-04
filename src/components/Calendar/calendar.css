@@ -10,9 +10,11 @@
 }
 
 .calendar__header-menu {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
   justify-content: space-between;
+  margin: 0 auto 0;
+  max-width: 350px;
 }
 
 .calendar__overlay {
@@ -51,9 +53,9 @@
   height: 75%;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 425px) {
   .calendar__content_opened {
-    height: 65%;
+    height: 70%;
   }
 }
 
@@ -95,22 +97,24 @@
   border-radius: 5px;
   font-weight: 500;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .calendar__day_underlining::after {
   content: '';
-  width: 30%;
+  width: 55%;
   margin-top: 20%;
   border-bottom: 2px solid gray;
 }
 
-/* .calendar__day_accepted::after {
-  border-bottom: 2px solid #0c6;
+.calendar__day_underlining_green::after {
+
+  border-bottom: 3px solid rgb(0,204,102);
 }
 
-.calendar__day_in-progress::after {
-  border-bottom: 2px solid #fc0;
-} */
+.calendar__day_underlining_yellow::after {
+  border-bottom: 3px solid rgb(255,204,0);
+}
 
 .calendar__day:hover {
   border: 1px solid gray;
