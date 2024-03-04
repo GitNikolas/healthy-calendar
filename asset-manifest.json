@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/healthy-calendar/static/css/main.50b4b791.css",
+    "main.js": "/healthy-calendar/static/js/main.29bb05da.js",
+    "static/js/453.3d6f18e7.chunk.js": "/healthy-calendar/static/js/453.3d6f18e7.chunk.js",
+    "static/media/calendarlogo.png": "/healthy-calendar/static/media/calendarlogo.a35c7ebb474ae5061265.png",
+    "index.html": "/healthy-calendar/index.html",
+    "main.50b4b791.css.map": "/healthy-calendar/static/css/main.50b4b791.css.map",
+    "main.29bb05da.js.map": "/healthy-calendar/static/js/main.29bb05da.js.map",
+    "453.3d6f18e7.chunk.js.map": "/healthy-calendar/static/js/453.3d6f18e7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.50b4b791.css",
+    "static/js/main.29bb05da.js"
+  ]
+}
