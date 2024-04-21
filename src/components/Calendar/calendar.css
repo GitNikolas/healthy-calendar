@@ -50,7 +50,7 @@
 
 .calendar__content_opened {
   transition: height linear .3s;
-  height: 75%;
+  height: 85%;
 }
 
 @media screen and (max-width: 425px) {
