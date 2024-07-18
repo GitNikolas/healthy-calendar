@@ -121,7 +121,11 @@
 }
 
 .calendar__today {
-  border: 2px solid rgb(5, 186, 5);
+  background-color: #cacaca;
+}
+
+.calendar__selected-day {
+  border: 2px solid rgb(0, 145, 182);
 }
 
 .calendar__weekend {
@@ -130,6 +134,21 @@
 
 .calendar__additional-day {
   color: #bdbebd;
+}
+
+.calendar__month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-weight: 500;
+  flex-direction: column;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.calendar__month:hover {
+  background-color: #e2e2e2;
 }
 
 .calendar__week-days {
@@ -149,4 +168,20 @@
   border-radius: 5px;
   color: white;
   font-size: 18px;
+}
+
+.calendar__pick__items__container {
+  font-weight: 400;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1px 1px;
+  font-size: 12px;
+}
+
+.calendar__unchoosable__year {
+  font-weight: 300;
+  padding: 9px 16px;
+  color: var(--color-placeholder);
 }
